@@ -37,6 +37,8 @@ gem 'devise'
 
 gem 'annotate'
 
+gem 'redcarpet'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
