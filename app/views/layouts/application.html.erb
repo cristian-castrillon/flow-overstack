@@ -9,9 +9,44 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    
+    <div class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="container">
+          <div class="navbar-header">
+            <%= link_to  "FlowOverstack", root_path, class: "navbar-brand" %>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li><%= link_to  "Salir", destroy_user_session_path, method: 'delete' %></li>
+            <% else %>
+              <li><%= link_to  "Ingresar", new_user_session_path %></li>
+              <li><%= link_to  "Registrarse", new_user_registration_path %></li>
+            <% end %>
+            <li>
+              <%= form_tag(questions_path, :method => "get", id: "search-form", class: "navbar-form") do %>
+                  <div class="form-group">
+                    <%= text_field_tag :search, params[:search], placeholder: "Buscar pregunta", class: "form-control" %>
+                  </div>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <% if flash[:notice] %>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <div class="alert alert-info">
+              <%= flash[:notice] %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -1,9 +1,13 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :find_question, only: [:show, :edit, :update, :destroy]
+  before_action :find_question, only: [:show]
 
   def index
-    @questions = Question.all
+    if params[:search]
+      @questions = Question.search(params[:search])
+    else
+      @questions = Question.all
+    end
   end
 
   def show
@@ -11,27 +15,17 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    
+    @question = Question.new
   end
 
   def create
-    
-  end
-
-  def edit
-    
-  end
-
-  def update
-    
-  end
-
-  def destroy
-    
-  end
-
-  def search_question
-    
+    @question = Question.new(question_params)
+    @question.user = current_user
+    if @question.save
+      redirect_to(root_path, notice: 'Pregunta publicada con éxito')
+    else
+      render :new
+    end
   end
 
   private

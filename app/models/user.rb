@@ -24,4 +24,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   
   has_many :questions
+
+  validates :email, :password, presence: true
 end

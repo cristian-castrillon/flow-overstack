@@ -12,4 +12,10 @@
 
 class Question < ApplicationRecord
   belongs_to :user
+
+  validates :title, :description, presence: true
+
+  def self.search(search)
+    where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%") 
+  end
 end
