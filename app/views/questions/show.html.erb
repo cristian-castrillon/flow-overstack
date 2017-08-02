@@ -1,8 +1,64 @@
+<% if @errors %>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="alert alert-info">
+          <ul>
+            <% @errors.each do |error| %>
+              <li><%= error %></li>
+            <% end %>
+          </ul>          
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <h1><%= @question.title %></h1>
-      <p><%= markdown(@question.description) %></p>
+      <div class="questions">
+        <h1><%= @question.title %></h1>
+        <p><%= markdown(@question.description) %></p>
+      </div>  
+    </div>  
+  </div>  
+
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="answers">
+        <% if @answers.blank? %>
+          <h2>0 Respuesta(s)</h2>
+        <% else %>  
+          <h2><%= @answers.count %> Respuesta(s)</h2>
+        <% end %>
+        
+        <table class="table">
+          <tbody>
+            <% @answers.each do |answer| %>
+              <tr>
+                <td>Votos</td>
+                <td>
+                  <p><%= markdown(answer.body) %></p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <% if user_signed_in? %>
+
+          <h2>Tu Respuesta</h2>
+          <%= form_for [@question, @question.answers.build] do |f| %>
+            <div class="form-group">
+              <%= f.text_area :body, class: "form-control" %>
+            </div>
+            <div class="actions text-right">
+                <%= f.submit "Responder", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
