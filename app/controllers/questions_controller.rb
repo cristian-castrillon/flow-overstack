@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    
+    @answers = @question.answers
   end
 
   def new
