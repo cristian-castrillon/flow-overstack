@@ -12,8 +12,16 @@ class CommentsController < ApplicationController
         render 'questions/show'
       end
     else
-      puts "Params: #{params}"
-      redirect_to(questions_path)
+      answer = Answer.find(params[:answer_id])
+      @question = Question.find(answer.question_id)
+      @answers = @question.answers
+      @comment = Comment.new
+      if answer.comments << comment
+        redirect_to(@question)
+      else
+        @errors = comment.errors.full_messages
+        render 'questions/show'
+      end
     end
   end
 
