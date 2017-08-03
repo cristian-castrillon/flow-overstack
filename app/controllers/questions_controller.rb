@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answers = @question.answers
+    @comment = Comment.new
   end
 
   def new
