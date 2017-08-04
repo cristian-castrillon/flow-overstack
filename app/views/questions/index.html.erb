@@ -1,38 +1,42 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <h1>Preguntas</h1>
-
-      <% if @questions.blank? %>
-        <div class="alert alert-info">
-          <h4>No hay preguntas que contengan el término <%= params[:search] %>.</h4>
-        </div>
-      <% end %>
-
-      <% if user_signed_in? %>
-        <%= link_to  "Hacer una Pregunta", new_question_path, class: "btn btn-primary pull-right" %>
-      <% end %>
-
-      <table class="table">
-        <tbody>
-          <% @questions.each do |question| %>
-            <tr>
-              <td class="text-center">
-                <h3><span><%= question.votes.count %></span></h3>
-                <p>Votos</hp
-              </td>
-              <td class="text-center">
-                <h3><span><%= question.answers.count %></span></h3>
-                <p>Respuestas</p>
-              </td>
-              <td>
-                <h3><%= link_to  question.title, question %></h3>
-                <p>Preguntó <%= question.user.email %> hace <%= time_ago_in_words(question.created_at) %></p>
-              </td>
-            </tr>
+      <div class="questions">
+        <h1>Preguntas</h1>
+        
+        <% if @questions.blank? %>
+          <div class="alert alert-info">
+            <h4>No hay preguntas que contengan el término <%= params[:search] %>.</h4>
+          </div>
+        <% end %>
+        
+        <div class="new-question">
+          <% if user_signed_in? %>
+            <%= link_to  "Hacer una Pregunta", new_question_path, class: "btn btn-primary pull-right" %>
           <% end %>
-        </tbody>
-      </table>
+        </div>
+        
+        <table class="table">
+          <tbody>
+            <% @questions.each do |question| %>
+              <tr>
+                <td class="text-center">
+                  <h3><span><%= question.votes.count %></span></h3>
+                  <p>Votos</hp
+                </td>
+                <td class="text-center">
+                  <h3><span><%= question.answers.count %></span></h3>
+                  <p>Respuestas</p>
+                </td>
+                <td>
+                  <h3><%= link_to  question.title, question %></h3>
+                  <p>Preguntó <%= question.user.email %> hace <%= time_ago_in_words(question.created_at) %></p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

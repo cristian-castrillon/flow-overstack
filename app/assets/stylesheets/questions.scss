@@ -8,5 +8,39 @@
 
 body {
   background-color: #F2F3F4;
-  // padding: 20px;
+  
+}
+
+.questions {
+  padding: 10px;
+}
+
+.new-question {
+  margin-bottom: 50px;
+}
+
+.upvote {
+  color: #000;
+  font-size: 30px;
+  position: relative;
+  float: left;
+  font-weight: bold;
+  line-height: 1;
+
+  &.upvote-voted {
+    color: #F04500;
+  }
+}
+
+.vote-counter-lk {
+  color: #000;
+}
+
+.vote-counter {
+  color: #000;
+  font-size: 30px;
+  position: relative;
+  float: left;
+  font-weight: bold;
+  line-height: 1;
 }
