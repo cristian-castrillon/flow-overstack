@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <h2>Log in</h2>
+      <h2>Ingresar</h2>
       
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        
+        <%= devise_error_messages! %>
 
         <div class="field">
           <%= f.label :email %><br />
@@ -25,7 +25,7 @@
         <% end -%>
       
         <div class="actions">
-          <%= f.submit "Log in", class: "btn btn-primary btn-lg btn-block" %>
+          <%= f.submit "Ingresar", class: "btn btn-primary btn-lg btn-block" %>
         </div>
       <% end %>
       
