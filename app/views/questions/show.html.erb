@@ -22,7 +22,23 @@
         <table class="table">
           <tbody>
             <tr>
-              <td>Votos</td>
+              <td class="text-center">
+                <% if user_signed_in? %>
+                  <% if @question.voted_by?(current_user) %>
+                    <%= link_to  question_vote_path(@question), method: :delete do %>
+                      <span><%= @question.votes.count %></span><br>
+                      <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to  question_vote_path(@question), method: :post do %>
+                      <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span><br>
+                      <span><%= @question.votes.count %></span>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <span><%= @question.votes.count %></span>
+                <% end %>
+              </td>
               <td>
                 <p><%= markdown(@question.description) %></p>
               </td>
@@ -39,7 +55,7 @@
                 <tr>
                   <td>
                     <header class="panel-heading">
-                      <h4><%= comment.commentable.user.email %> comentó hace <% if !comment.text.blank? %><%= time_ago_in_words(comment.created_at) %><% end %></h4>
+                      <h4><%= comment.user.email %> comentó hace <% if !comment.text.blank? %><%= time_ago_in_words(comment.created_at) %><% end %></h4>
                     </header>
                     <div class="panel-body">
                       <p><%= comment.text %></p>
@@ -85,7 +101,24 @@
           <tbody>
             <% @answers.each do |answer| %>
               <tr>
-                <td>Votos</td>
+                <td class="text-center">
+                  <h3>Votos</h3>
+                  <% if user_signed_in? %>
+                    <% if answer.voted_by?(current_user) %>
+                      <%= link_to  answer_vote_path(answer), method: :delete do %>
+                        <span><%= answer.votes.count %></span><br>
+                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                      <% end %>
+                    <% else %>
+                      <%= link_to  answer_vote_path(answer), method: :post do %>
+                        <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span><br>
+                        <span><%= answer.votes.count %></span>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <span><%= answer.votes.count %></span>
+                  <% end %>
+                </td>
                 <td>
                   <p><%= markdown(answer.body) %></p>
                 </td>
@@ -103,7 +136,7 @@
                     <td></td>
                     <td>
                       <header class="panel-heading">
-                        <h4><%= comment.commentable.user.email %> comentó hace <%= time_ago_in_words(comment.created_at) %></h4>
+                        <h4><%= comment.user.email %> comentó hace <%= time_ago_in_words(comment.created_at) %></h4>
                       </header>
                       <div class="panel-body">
                         <p><%= comment.text %></p>
