@@ -22,7 +22,24 @@
         <table class="table">
           <tbody>
             <tr>
-              <td>Votos</td>
+              <td class="text-center">
+                <h3>Votos</h3>
+                <% if user_signed_in? %>
+                  <% if @question.voted_by?(current_user) %>
+                    <%= link_to  question_vote_path(@question), method: :delete do %>
+                      <span><%= @question.votes.count %></span><br>
+                      <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to  question_vote_path(@question), method: :post do %>
+                      <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span><br>
+                      <span><%= @question.votes.count %></span>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <span><%= @question.votes.count %></span>
+                <% end %>
+              </td>
               <td>
                 <p><%= markdown(@question.description) %></p>
               </td>

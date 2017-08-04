@@ -17,8 +17,14 @@
         <tbody>
           <% @questions.each do |question| %>
             <tr>
-              <td>Votos</td>
-              <td>Respuestas</td>
+              <td class="text-center">
+                <h3><span><%= question.votes.count %></span></h3>
+                <p>Votos</hp
+              </td>
+              <td class="text-center">
+                <h3><span><%= question.answers.count %></span></h3>
+                <p>Respuestas</p>
+              </td>
               <td>
                 <h3><%= link_to  question.title, question %></h3>
                 <p>Preguntó <%= question.user.email %> hace <%= time_ago_in_words(question.created_at) %></p>
