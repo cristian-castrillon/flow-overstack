@@ -39,7 +39,7 @@
                 <tr>
                   <td>
                     <header class="panel-heading">
-                      <h4><%= comment.commentable.user.email %> comentó hace <% if !comment.text.blank? %><%= time_ago_in_words(comment.created_at) %><% end %></h4>
+                      <h4><%= comment.user.email %> comentó hace <% if !comment.text.blank? %><%= time_ago_in_words(comment.created_at) %><% end %></h4>
                     </header>
                     <div class="panel-body">
                       <p><%= comment.text %></p>
@@ -103,7 +103,7 @@
                     <td></td>
                     <td>
                       <header class="panel-heading">
-                        <h4><%= comment.commentable.user.email %> comentó hace <%= time_ago_in_words(comment.created_at) %></h4>
+                        <h4><%= comment.user.email %> comentó hace <%= time_ago_in_words(comment.created_at) %></h4>
                       </header>
                       <div class="panel-body">
                         <p><%= comment.text %></p>

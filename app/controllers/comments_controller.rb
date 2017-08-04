@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   def create
     comment = Comment.new(comment_params)
+    comment.user = current_user
     if params[:question_id]
       @question = Question.find(params[:question_id])
       @answers = @question.answers
